@@ -9,6 +9,7 @@ $(function () {
       setMapColor(districtData);
       changeData(districtData);
       setMapData(districtData);
+      showMapFromTable(districtData);
       $('#lastUpdate').text("Last update on : " + res.updated_on);
     })
     .fail(function () {
@@ -53,11 +54,13 @@ function setBtnData(res) {
   $("#disTableBtn").html(btnStr);
 }
 
-function changeData(data) {
+function changeData(districtData) {
   $(".commonClass").click(function () {
     let pageNum = this.id;
     //$('#' + pageNum).css({ "background-color": "blue" });
-    makeTable(data, pageNum);
+    makeTable(districtData, pageNum);
+    window.localStorage.clear();
+    showMapFromTable(districtData);
   });
 }
 
@@ -69,7 +72,9 @@ function makeTable(data, pageNum) {
 
   let currentNum = pageNum * 10;
   for (let i = currentNum - 10; i < Math.min(currentNum, data.length); i++) {
-    tableStr += "<tr><td>" + data[i].name + "</td>";
+    if (data[i].name === "Dhaka (District)") data[i].name = "Dhaka";
+    if (data[i].name === "Cox's bazar") data[i].name = "Coxs Bazar";
+    tableStr += "<tr id='"+ data[i].name +"'><td>" + data[i].name + "</td>";
     tableStr += "<td>" + data[i].count + "</td>";
     tableStr += "<td>" + data[i].prev_count + "</td>";
     tableStr += "<td>" + (data[i].count - data[i].prev_count) + "</td></tr>";
@@ -90,5 +95,32 @@ function setMapData(districtData) {
     tooltip.style.display = 'block';
     $(myId).css('top', event.pageY - 70);
     $(myId).css('left', event.pageX - 10);
+  });
+  $("a").mouseleave(function() {
+    tooltip.style.display = 'none';
+  });
+}
+
+function showMapFromTable(districtData) {
+  $("tr").on("mouseover", function () {
+    window.localStorage.clear();
+    let districtName = this.id;
+    let disID = mapData.find(el => el.name === districtName).id;
+    let getColor = $('#' + disID).css('fill');
+    if (disID) {
+      window.localStorage.setItem("disID", disID);
+      window.localStorage.setItem("disColor", getColor);
+      $('#' + disID).css("fill", "black");
+    }
+    console.log(districtName)
+    //console.log(getColor)
+    //console.log(districtName, disID);
+  });
+  $("tr").mouseleave(function() {
+    let disID = window.localStorage.getItem("disID");
+    let disColor = window.localStorage.getItem("disColor");
+    console.log(disID, disColor)
+    $('#' + disID).css("fill", disColor);
+    window.localStorage.clear();
   });
 }
