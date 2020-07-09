@@ -47,14 +47,6 @@
     cursor: pointer
 }
 
-a:hover path,
-a:hover polyline,
-g:hover path,
-path:hover,
-polyline:hover {
-    fill: #1eff00
-}
-
 @media only screen and (max-width:823px) {
     .districtLargeArea {
         font-size: 20px
@@ -85,7 +77,18 @@ polyline:hover {
     }
 }
 
-#selectedDistrictInfoCards {
+#myId {
+    position: absolute;
     display: none;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border:#d3d3d3 solid 1px;
+    background: #fff;
+    color: black;
+    font-family: Comfortaa, Verdana;
+    font-size: 16;
+    padding: 8px;
+    pointer-events:none;
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-

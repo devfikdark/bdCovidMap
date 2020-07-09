@@ -1,5 +1,6 @@
 $(function () {
   $('select').formSelect();
+  $('.tooltipped').tooltip();
   let apiURL = "https://corona-bd.herokuapp.com/district";
   $.get(apiURL, function () {})
     .done(function (res) {
@@ -7,7 +8,7 @@ $(function () {
       setBtnData(res);
       setMapColor(districtData);
       changeData(districtData);
-      //setMapData(districtData);
+      setMapData(districtData);
       $('#lastUpdate').text("Last update on : " + res.updated_on);
     })
     .fail(function () {
@@ -64,33 +65,30 @@ function makeTable(data, pageNum) {
   let tableStr = "<table>";
   tableStr +="<thead><tr><th><strong>District</strong></th><th>";
   tableStr += "<strong>Today</strong><th><strong>Last-Day</strong>";
-  tableStr += "</th></th></tr></thead><tbody>";
+  tableStr += "</th><th><strong>New</strong></th></th></tr></thead><tbody>";
 
   let currentNum = pageNum * 10;
   for (let i = currentNum - 10; i < Math.min(currentNum, data.length); i++) {
     tableStr += "<tr><td>" + data[i].name + "</td>";
     tableStr += "<td>" + data[i].count + "</td>";
-    tableStr += "<td>" + data[i].prev_count + "</td></tr>";
+    tableStr += "<td>" + data[i].prev_count + "</td>";
+    tableStr += "<td>" + (data[i].count - data[i].prev_count) + "</td></tr>";
   }
   tableStr += "</tbody></table>";
   $("#disTable").html(tableStr);
 }
 
 function setMapData(districtData) {
-  console.log(districtData);
-
-  $("a").on("click", function () {
-    let districtId = $(this).data("id");
+  $tooltip = $('#myId');
+  let tooltip = document.querySelector('#myId');
+  $("a").on("click mouseover", function (event) {
     let districtName = $(this).data("value");
     if (districtName === "Dhaka") districtName = "Dhaka (District)";
     if (districtName === "Coxs Bazar") districtName = "Cox's bazar";
-    let selectedDistrict = districtData.find((o) => o.name === districtName);
-
-    console.log(selectedDistrict);
-    console.log(districtId);
-    console.log(districtName);
-    let msg = `${districtName} has ${selectedDistrict.count} infected cases.`;
-    setModal(msg);
-    // $("#myId").text(districtName + " " + selectedDistrict.count + " infected.");
+    let selectedDistrict = districtData.find((o) => o.name === districtName);    
+    $tooltip.html(districtName + " : " + selectedDistrict.count);
+    tooltip.style.display = 'block';
+    $(myId).css('top', event.pageY - 70);
+    $(myId).css('left', event.pageX - 10);
   });
 }
