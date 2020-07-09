@@ -35,7 +35,7 @@ mapData.push({ name: "Rajshahi", id: "dist_50" });
 mapData.push({ name: "Naogaon", id: "dist_280" });
 mapData.push({ name: "Gaibandha", id: "dist_322" });
 mapData.push({ name: "Rangpur", id: "dist_47" });
-mapData.push({ name: "Panchagar", id: "dist_483" });
+mapData.push({ name: "Panchagar", id: "dist_484" });
 mapData.push({ name: "Kurigram", id: "dist_301" });
 mapData.push({ name: "Bogura", id: "dist_277" });
 mapData.push({ name: "B. Baria", id: "dist_328" });

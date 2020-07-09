@@ -75,56 +75,8 @@ polyline:hover {
     stroke-miterlimit: 10
 }
 
-.dhakaDivision {
-    fill: #ff5252;
-}
-
-.mymenshingDivision {
-    fill: #2bbd7e;
-}
-
-.rajshahiDivision {
-    fill: #ff4081;
-}
-
-.chittagongDivision {
-    fill: #03a9f4;
-}
-
-.barishalDivision {
-    fill: #ab47bc;
-}
-
-.khulnaDivision {
-    fill: #ff7043;
-}
-
-.rangpurDivision {
-    fill: #26c6da;
-}
-
-.sylhetDivision {
-    fill: #ff9800;
-}
-
 .btn.waves-effect.waves-light { 
     border-radius: 15px;
-}
-
-#each_District {
-    position: absolute;
-    display: none;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    border:#d3d3d3 solid 1px;
-    background: #fff;
-    color: black;
-    font-family: Comfortaa, Verdana;
-    font-size: 16;
-    padding: 8px;
-    pointer-events:none;
-    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 @media only screen and (max-width:600px) {    

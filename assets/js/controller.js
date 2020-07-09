@@ -1,6 +1,5 @@
 $(function () {
   $('select').formSelect();
-
   let apiURL = "https://corona-bd.herokuapp.com/district";
   $.get(apiURL, function () {})
     .done(function (res) {
@@ -17,11 +16,25 @@ $(function () {
 });
 
 function setMapColor(districtData) {
-  //console.log(districtData);
   for (let i = 0; i < districtData.length; i++) {
-    let disName = districtData[i];
+    let disName = districtData[i].name;
+    if (disName === "Dhaka (District)") disName = "Dhaka";
+    if (disName === "Cox's bazar") disName = "Coxs Bazar";
+
+    let cnt = districtData[i].count;
     let data = mapData.find(el => el.name === disName);
-    console.log(data);
+
+    if (cnt > 0 && cnt <= 50) {
+      $('#' + data.id).css({ fill: "#f8c1c3" });
+    } else if (cnt > 50 && cnt <= 100) {
+      $('#' + data.id).css({ fill: "#f3989b" });
+    } else if (cnt > 100 && cnt <= 500) {
+      $('#' + data.id).css({ fill: "#ee6e73" });
+    } else if (cnt > 500 && cnt <= 1000) {
+      $('#' + data.id).css({ fill: "#ea454b" });
+    } else {
+      $('#' + data.id).css({ fill: "#FF1744" });
+    }
   }
 }
 
