@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--CSS-->
+  <link rel="stylesheet" href="assets/css/materialize.min.css">
+  <link rel="stylesheet" href="assets/css/mapStyle.css">
+
+  <title>BD Covid19 Map</title>
+</head>
+<body>
+  <div class="customContainer">
+    <div class="row">
+      <div class="col s12 l12">
+        <h4 class="center-align">Map Visualization</h4>
+        <div class="card round hoverable">
+          <div class="row">
+            <div id="mapColumn" class="col s12 m6">
+              <div id="bangladesh"></div>
+            </div>
+            <div class="col s12 m2">
+              <ul>
+                <li><span class="badge red lighten-4"></span> 1-50 </li>
+                <li><span class="badge red lighten-3"></span> 51-100 </li>
+                <li><span class="badge red lighten-2"></span> 101-500 </li>
+                <li><span class="badge red lighten-1"></span> 501-1000 </li>
+                <li><span class="badge red accent-3"></span> 1000+ </li>
+              </ul>
+              
+              <br>
+              <select>
+                <option value="" disabled selected>Choose your option</option>
+                <option value="Dhaka">Dhaka</option>
+                <option value="Chattogram">Chattogram</option>
+                <option value="Rajshahi">Rajshahi</option>
+                <option value="Khulna">Khulna</option>
+                <option value="Rangpur">Rangpur</option>
+                <option value="Mymensingh">Mymensingh</option>
+                <option value="Barishal">Barishal</option>
+                <option value="Sylhet">Sylhet</option>
+              </select>
+            </div>
+            <div id="lastUpdate"></div>
+            <br>
+            <div class="col s12 m3">
+              <div class="row">
+                  <div id="disTable"></div>
+                  <div id="disTableBtn"></div>
+              </div>
+            </div>    
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!---Js-->
+  <script src="assets//js/jquery.min.js"></script>
+  <script src="assets//js/materialize.min.js"></script>
+  <script src="assets/js/mapData.js"></script>
+  <script src="assets/js/map.js"></script>
+  <script src="assets/js/controller.js"></script>
+
+</body>
+</html>
