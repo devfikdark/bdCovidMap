@@ -1,6 +1,4 @@
 $(function () {
-  $('select').formSelect();
-  $('.tooltipped').tooltip();
   let apiURL = "https://corona-bd.herokuapp.com/district";
   $.get(apiURL, function () {})
     .done(function (res) {
@@ -9,6 +7,7 @@ $(function () {
       setMapColor(districtData);
       changeData(districtData);
       setMapData(districtData);
+      //setDivisionMap(districtData);
       showMapFromTable(districtData);
       $('#lastUpdate').text("Last update on : " + res.updated_on);
     })
@@ -88,8 +87,6 @@ function setMapData(districtData) {
   let tooltip = document.querySelector('#myId');
   $("a").on("click mouseover", function (event) {
     let districtName = $(this).data("value");
-    if (districtName === "Dhaka") districtName = "Dhaka (District)";
-    if (districtName === "Coxs Bazar") districtName = "Cox's bazar";
     let selectedDistrict = districtData.find((o) => o.name === districtName);    
     $tooltip.html(districtName + " : " + selectedDistrict.count);
     tooltip.style.display = 'block';
@@ -101,26 +98,26 @@ function setMapData(districtData) {
   });
 }
 
+function setDivisionMap(districtData) {
+  $("#divisionNameID").click(function () {
+    let divName = $('#divisionNameID').val();
+    console.log(divName);
+  });
+}
+
 function showMapFromTable(districtData) {
   $("tr").on("mouseover", function () {
     window.localStorage.clear();
     let districtName = this.id;
     let disID = mapData.find(el => el.name === districtName).id;
-    let getColor = $('#' + disID).css('fill');
     if (disID) {
       window.localStorage.setItem("disID", disID);
-      window.localStorage.setItem("disColor", getColor);
-      $('#' + disID).css("fill", "black");
+      $('#' + disID).hide();
     }
-    console.log(districtName)
-    //console.log(getColor)
-    //console.log(districtName, disID);
   });
   $("tr").mouseleave(function() {
     let disID = window.localStorage.getItem("disID");
-    let disColor = window.localStorage.getItem("disColor");
-    console.log(disID, disColor)
-    $('#' + disID).css("fill", disColor);
+    $('#' + disID).show();
     window.localStorage.clear();
   });
 }
