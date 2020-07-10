@@ -1,4 +1,4 @@
-## BD COVID-19 MAP :world_map: :bangladesh:
+# BD COVID-19 MAP :world_map: :bangladesh:
 
 As COVID-19 is a global pandemic of today's world, Bangladesh has also become the victim of corona virus. Number of COVID-19 patients are increasing day by day in our country and its spreading in every district of our country. As it is spreading fast we may need to get a visual of our country of number of COVID-19 patients in every district. For this purpose, we've made this site where anyone can get overall visual of our country's present status of COVID-19.
 
