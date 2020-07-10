@@ -17,16 +17,34 @@ You can **hover/click** over the map to get the number of positive cases of that
 ## Usage
 
 If you want to embed this map in your website you can do so by adding the following code in your html.
+
 ```html
+
 <iframe
       src="https://pro-js.github.io/bdCovidMap/"
-      height="600"
-      width="1330"
-      title="Iframe Example"
+      height="400"
+      width="200"
+      frameborder="0"
+      scrolling="auto"
+      class="frame-area"
+      title="BD COVID-19 MAP"
     ></iframe>
 ```
 
-If you like our work please give us a :star: to show your appreciation about our work.
+To make it responsive you can add the following `css` code into your style.
+```css
+.frame-area {
+    display: block;
+    width: 100%; /* RESPONSIVE WIDTH */
+    max-width: 1330px;
+    height: 600px;
+    overflow: auto;
+    margin: 0px;
+    padding: 0px;
+}
+```
+
+### If you like our work please give us a :star: to show your appreciation about our work.
 
 
 
