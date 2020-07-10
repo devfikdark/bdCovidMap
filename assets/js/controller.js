@@ -2,13 +2,15 @@ $(function () {
   let apiURL = "https://corona-bd.herokuapp.com/district";
   $.get(apiURL, function () {})
     .done(function (res) {
+      //let mouseAllow = true;
+      //window.localStorage.setItem("mouseAllow", mouseAllow);
       let districtData = res.data;
       setBtnData(res);
       setMapColor(districtData);
       changeData(districtData);
       setMapData(districtData);
-      //setDivisionMap(districtData);
-      showMapFromTable(districtData);
+      setDivisionMap();
+      showMapFromTable();
       $('#lastUpdate').text("Last update on : " + res.updated_on);
     })
     .fail(function () {
@@ -98,14 +100,116 @@ function setMapData(districtData) {
   });
 }
 
-function setDivisionMap(districtData) {
-  $("#divisionNameID").click(function () {
-    let divName = $('#divisionNameID').val();
-    console.log(divName);
+function setDivisionMap() {
+  $("select.divisionName").change(function(){
+    //let mouseAllow = false;
+    //window.localStorage.setItem("mouseAllow", mouseAllow);
+    let divName = $(this).children("option:selected").val();
+    allDivShow();
+    if (divName === "dhaka") {
+      $('.rajshahiDivision').hide();
+      $('.khulnaDivision').hide();
+      $('.rangpurDivision').hide();
+      $('.mymenshingDivision').hide();
+      $('.barishalDivision').hide();
+      $('.sylhetDivision').hide();
+      $('.chittagongDivision').hide();
+      $('.st1').hide();
+      $('.div_Dha').show();
+    } else if (divName === "chittagong") {
+      $('.rajshahiDivision').hide();
+      $('.khulnaDivision').hide();
+      $('.rangpurDivision').hide();
+      $('.mymenshingDivision').hide();
+      $('.barishalDivision').hide();
+      $('.sylhetDivision').hide();
+      $('.dhakaDivision').hide();
+      $('.st1').hide();
+      $('.div_Cha').show();
+    } else if (divName === "rajshahi") {
+      $('.chittagongDivision').hide();
+      $('.khulnaDivision').hide();
+      $('.rangpurDivision').hide();
+      $('.mymenshingDivision').hide();
+      $('.barishalDivision').hide();
+      $('.sylhetDivision').hide();
+      $('.dhakaDivision').hide();
+      $('.st1').hide();
+      $('.div_Raj').show();
+    } else if (divName === "khulna") {
+      $('.chittagongDivision').hide();
+      $('.rajshahiDivision').hide();
+      $('.rangpurDivision').hide();
+      $('.mymenshingDivision').hide();
+      $('.barishalDivision').hide();
+      $('.sylhetDivision').hide();
+      $('.dhakaDivision').hide();
+      $('.st1').hide();
+      $('.div_Khu').show();
+    } else if (divName === "rangpur") {
+      $('.chittagongDivision').hide();
+      $('.rajshahiDivision').hide();
+      $('.khulnaDivision').hide();
+      $('.mymenshingDivision').hide();
+      $('.barishalDivision').hide();
+      $('.sylhetDivision').hide();
+      $('.dhakaDivision').hide();
+      $('.st1').hide();
+      $('.div_Ran').show();
+    } else if (divName === "mymenshing") {
+      $('.chittagongDivision').hide();
+      $('.rajshahiDivision').hide();
+      $('.khulnaDivision').hide();
+      $('.rangpurDivision').hide();
+      $('.barishalDivision').hide();
+      $('.sylhetDivision').hide();
+      $('.dhakaDivision').hide();
+      $('.st1').hide();
+      $('.div_Mym').show();
+    } else if (divName === "barishal") {
+      $('.chittagongDivision').hide();
+      $('.rajshahiDivision').hide();
+      $('.khulnaDivision').hide();
+      $('.rangpurDivision').hide();
+      $('.mymenshingDivision').hide();
+      $('.sylhetDivision').hide();
+      $('.dhakaDivision').hide();
+      $('.st1').hide();
+      $('.div_Bar').show();
+    } else if (divName === "sylhet") {
+      $('.chittagongDivision').hide();
+      $('.rajshahiDivision').hide();
+      $('.khulnaDivision').hide();
+      $('.rangpurDivision').hide();
+      $('.mymenshingDivision').hide();
+      $('.barishalDivision').hide();
+      $('.dhakaDivision').hide();
+      $('.st1').hide();
+      $('.div_Syl').show();
+    } else {
+      allDivShow();
+      //mouseAllow = true;
+    }
+    //console.log(mouseAllow)
+    //window.localStorage.setItem("mouseAllow", mouseAllow);
   });
 }
 
-function showMapFromTable(districtData) {
+function allDivShow() {
+  $('.chittagongDivision').show();
+  $('.rajshahiDivision').show();
+  $('.khulnaDivision').show();
+  $('.rangpurDivision').show();
+  $('.mymenshingDivision').show();
+  $('.barishalDivision').show();
+  $('.dhakaDivision').show();
+  $('.sylhetDivision').show();
+  $('.st1').show();
+}
+
+function showMapFromTable() {
+  //let mouseAllow = window.localStorage.getItem("mouseAllow");
+  //console.log(mouseAllow)
   $("tr").on("mouseover", function () {
     window.localStorage.clear();
     let districtName = this.id;
