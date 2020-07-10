@@ -1,5 +1,7 @@
 $(function () {
   let apiURL = "https://corona-bd.herokuapp.com/district";
+  $("main").hide();
+  
   $.get(apiURL, function () {})
     .done(function (res) {
       //let mouseAllow = true;
@@ -12,6 +14,8 @@ $(function () {
       setDivisionMap();
       showMapFromTable();
       $('#lastUpdate').text("Last update on : " + res.updated_on);
+      $('.mainLoader').hide();
+      $("main").show();
     })
     .fail(function () {
       console.log("Internal Problem!!!");
