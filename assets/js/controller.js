@@ -8,6 +8,7 @@ $(function () {
       //window.localStorage.setItem("mouseAllow", mouseAllow);
       let districtData = res.data;
       setBtnData(res);
+      defaultBtnColor();
       setMapColor(districtData);
       changeData(districtData);
       setMapData(districtData);
@@ -52,7 +53,7 @@ function setBtnData(res) {
 
   for (let i = 1; i <= pages; i++) {
     btnStr +=
-      "<li class='waves-effect'><a class='commonClass btn blue-grey lighten-4' id='" +
+      "<li class='waves-effect'><a class='commonClass btn' id='" +
       i +
       "'";
     btnStr += ">" + i + "</a></li>";
@@ -64,12 +65,24 @@ function setBtnData(res) {
 
 function changeData(districtData) {
   $(".commonClass").click(function () {
+    // set default btn colors
+    defaultBtnColor();
     let pageNum = this.id;
-    // $("#" + pageNum).css({ "background-color": "blue" });
+    $("#" + pageNum).css({ backgroundColor: "#69f0ae" });
     makeTable(districtData, pageNum);
     window.localStorage.clear();
     showMapFromTable(districtData);
   });
+}
+
+function defaultBtnColor() {
+  $("#1").css({ backgroundColor: "#cfd8dc" });
+  $("#2").css({ backgroundColor: "#cfd8dc" });
+  $("#3").css({ backgroundColor: "#cfd8dc" });
+  $("#4").css({ backgroundColor: "#cfd8dc" });
+  $("#5").css({ backgroundColor: "#cfd8dc" });
+  $("#6").css({ backgroundColor: "#cfd8dc" });
+  $("#7").css({ backgroundColor: "#cfd8dc" });
 }
 
 function makeTable(data, pageNum) {
