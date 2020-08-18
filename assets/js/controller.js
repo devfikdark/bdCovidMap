@@ -25,12 +25,12 @@ $(function () {
 function setMapColor(districtData) {
   for (let i = 0; i < districtData.length; i++) {
     let disName = districtData[i].name;
-    if (disName === "Dhaka (District)") disName = "Dhaka";
+    if (disName === "Dhaka City") disName = "Dhaka";
     if (disName === "Cox's bazar") disName = "Coxs Bazar";
-
+    if (disName === "Jashore" || disName === "Moulvibazar" 
+    || disName === "Panchagarh") continue;
     let cnt = districtData[i].count;
     let data = mapData.find((el) => el.name === disName);
-
     if (cnt > 0 && cnt <= 50) {
       $("#" + data.id).css({ fill: "#f8c1c3" });
     } else if (cnt > 50 && cnt <= 100) {
