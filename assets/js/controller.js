@@ -1,12 +1,10 @@
 $(function () {
-  let apiURL = "https://corona-bd.herokuapp.com/district";
+  const apiURL = "https://corona-bd.herokuapp.com/district";
   $("main").hide();
 
   $.get(apiURL, function () {})
     .done(function (res) {
-      //let mouseAllow = true;
-      //window.localStorage.setItem("mouseAllow", mouseAllow);
-      let districtData = res.data;
+      const districtData = res.data;
       setBtnData(res);
       defaultBtnColor();
       setMapColor(districtData);
@@ -28,29 +26,38 @@ function setMapColor(districtData) {
     let disName = districtData[i].name;
     if (disName === "Dhaka City") disName = "Dhaka";
     if (disName === "Cox's bazar") disName = "Coxs Bazar";
-    if (disName === "Jashore" || disName === "Moulvibazar" 
-    || disName === "Panchagarh") continue;
-    let cnt = districtData[i].count;
-    let data = mapData.find((el) => el.name === disName);
+    if (disName === "Jashore" || disName === "Moulvibazar" ||
+      disName === "Panchagarh") continue;
+    const cnt = districtData[i].count;
+    const data = mapData.find((el) => el.name === disName);
+    if (data === undefined) continue;
     if (cnt > 0 && cnt <= 50) {
-      $("#" + data.id).css({ fill: "#f8c1c3" });
+      $("#" + data.id).css({
+        fill: "#f8c1c3"
+      });
     } else if (cnt > 50 && cnt <= 100) {
-      $("#" + data.id).css({ fill: "#f3989b" });
+      $("#" + data.id).css({
+        fill: "#f3989b"
+      });
     } else if (cnt > 100 && cnt <= 500) {
-      $("#" + data.id).css({ fill: "#ee6e73" });
+      $("#" + data.id).css({
+        fill: "#ee6e73"
+      });
     } else if (cnt > 500 && cnt <= 1000) {
-      $("#" + data.id).css({ fill: "#ea454b" });
+      $("#" + data.id).css({
+        fill: "#ea454b"
+      });
     } else {
-      $("#" + data.id).css({ fill: "#FC0404" });
+      $("#" + data.id).css({
+        fill: "#FC0404"
+      });
     }
   }
 }
 
 function setBtnData(res) {
-  let pages = Math.ceil(res.data.length / 10);
-
-  let btnStr = "<ul class='pagination'>";
-
+  const pages = Math.ceil(res.data.length / 10);
+  const btnStr = "<ul class='pagination'>";
   for (let i = 1; i <= pages; i++) {
     btnStr +=
       "<li class='waves-effect'><a class='commonClass btn' id='" +
@@ -67,8 +74,10 @@ function changeData(districtData) {
   $(".commonClass").click(function () {
     // set default btn colors
     defaultBtnColor();
-    let pageNum = this.id;
-    $("#" + pageNum).css({ backgroundColor: "#69f0ae" });
+    const pageNum = this.id;
+    $("#" + pageNum).css({
+      backgroundColor: "#69f0ae"
+    });
     makeTable(districtData, pageNum);
     window.localStorage.clear();
     showMapFromTable(districtData);
@@ -76,22 +85,36 @@ function changeData(districtData) {
 }
 
 function defaultBtnColor() {
-  $("#1").css({ backgroundColor: "#cfd8dc" });
-  $("#2").css({ backgroundColor: "#cfd8dc" });
-  $("#3").css({ backgroundColor: "#cfd8dc" });
-  $("#4").css({ backgroundColor: "#cfd8dc" });
-  $("#5").css({ backgroundColor: "#cfd8dc" });
-  $("#6").css({ backgroundColor: "#cfd8dc" });
-  $("#7").css({ backgroundColor: "#cfd8dc" });
+  $("#1").css({
+    backgroundColor: "#cfd8dc"
+  });
+  $("#2").css({
+    backgroundColor: "#cfd8dc"
+  });
+  $("#3").css({
+    backgroundColor: "#cfd8dc"
+  });
+  $("#4").css({
+    backgroundColor: "#cfd8dc"
+  });
+  $("#5").css({
+    backgroundColor: "#cfd8dc"
+  });
+  $("#6").css({
+    backgroundColor: "#cfd8dc"
+  });
+  $("#7").css({
+    backgroundColor: "#cfd8dc"
+  });
 }
 
 function makeTable(data, pageNum) {
-  let tableStr = "<table>";
+  const tableStr = "<table>";
   tableStr += "<thead><tr><th><strong>District</strong></th><th>";
   tableStr += "<strong>Today</strong><th><strong>Last-Day</strong>";
   tableStr += "</th><th><strong>New</strong></th></th></tr></thead><tbody>";
 
-  let currentNum = pageNum * 10;
+  const currentNum = pageNum * 10;
   for (let i = currentNum - 10; i < Math.min(currentNum, data.length); i++) {
     if (data[i].name === "Dhaka (District)") data[i].name = "Dhaka";
     if (data[i].name === "Cox's bazar") data[i].name = "Coxs Bazar";
@@ -106,10 +129,10 @@ function makeTable(data, pageNum) {
 
 function setMapData(districtData) {
   $tooltip = $("#myId");
-  let tooltip = document.querySelector("#myId");
+  const tooltip = document.querySelector("#myId");
   $("a").on("click mouseover", function (event) {
-    let districtName = $(this).data("value");
-    let selectedDistrict = districtData.find((o) => o.name === districtName);
+    const districtName = $(this).data("value");
+    const selectedDistrict = districtData.find((o) => o.name === districtName);
     $tooltip.html(districtName + " : " + selectedDistrict.count);
     tooltip.style.display = "block";
     $(myId).css("top", event.pageY - 70);
@@ -122,9 +145,7 @@ function setMapData(districtData) {
 
 function setDivisionMap() {
   $("select.divisionName").change(function () {
-    //let mouseAllow = false;
-    //window.localStorage.setItem("mouseAllow", mouseAllow);
-    let divName = $(this).children("option:selected").val();
+    const divName = $(this).children("option:selected").val();
     allDivShow();
     if (divName === "dhaka") {
       $(".rajshahiDivision").hide();
@@ -208,10 +229,7 @@ function setDivisionMap() {
       $(".div_Syl").show();
     } else {
       allDivShow();
-      //mouseAllow = true;
     }
-    //console.log(mouseAllow)
-    //window.localStorage.setItem("mouseAllow", mouseAllow);
   });
 }
 
@@ -228,19 +246,17 @@ function allDivShow() {
 }
 
 function showMapFromTable() {
-  //let mouseAllow = window.localStorage.getItem("mouseAllow");
-  //console.log(mouseAllow)
   $("tr").on("mouseover", function () {
     window.localStorage.clear();
-    let districtName = this.id;
-    let disID = mapData.find((el) => el.name === districtName).id;
+    const districtName = this.id;
+    const disID = mapData.find((el) => el.name === districtName).id;
     if (disID) {
       window.localStorage.setItem("disID", disID);
       $("#" + disID).hide();
     }
   });
   $("tr").mouseleave(function () {
-    let disID = window.localStorage.getItem("disID");
+    const disID = window.localStorage.getItem("disID");
     $("#" + disID).show();
     window.localStorage.clear();
   });
