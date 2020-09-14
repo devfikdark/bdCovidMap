@@ -57,7 +57,7 @@ function setMapColor(districtData) {
 
 function setBtnData(res) {
   const pages = Math.ceil(res.data.length / 10);
-  const btnStr = "<ul class='pagination'>";
+  let btnStr = "<ul class='pagination'>";
   for (let i = 1; i <= pages; i++) {
     btnStr +=
       "<li class='waves-effect'><a class='commonClass btn' id='" +
@@ -109,7 +109,7 @@ function defaultBtnColor() {
 }
 
 function makeTable(data, pageNum) {
-  const tableStr = "<table>";
+  let tableStr = "<table>";
   tableStr += "<thead><tr><th><strong>District</strong></th><th>";
   tableStr += "<strong>Today</strong><th><strong>Last-Day</strong>";
   tableStr += "</th><th><strong>New</strong></th></th></tr></thead><tbody>";
@@ -129,7 +129,7 @@ function makeTable(data, pageNum) {
 
 function setMapData(districtData) {
   $tooltip = $("#myId");
-  const tooltip = document.querySelector("#myId");
+  let tooltip = document.querySelector("#myId");
   $("a").on("click mouseover", function (event) {
     const districtName = $(this).data("value");
     const selectedDistrict = districtData.find((o) => o.name === districtName);
